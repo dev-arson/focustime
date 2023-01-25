@@ -3,19 +3,20 @@ import { StyleSheet, View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { UiRoundedButton } from '@/components';
 
-export default () => {
-  const [subject, setSubcject] = useState(null);
+export default ({ addSubcject }) => {
+  const [subject, setSubject] = useState(null);
 
   return (
     <View style={styles.wrapper}>
       <View style={styles.inputContainer}>
         <TextInput
-          onChangeText={setSubcject}
+          onChangeText={setSubject}
           label="What would You like to focus on?"
           style={styles.textInput}/>
         <UiRoundedButton
           text="+"
-          style={styles.buttonContainer} />
+          style={styles.buttonContainer} 
+          onPress={() => { addSubcject(subject) }}/>
       </View>
     </View>
   );
