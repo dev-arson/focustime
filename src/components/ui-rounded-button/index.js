@@ -4,6 +4,7 @@ import UiIcon from '../ui-icon';
 
 export default UiRoundedButton = ({
   onPress = () => {},
+  iconName,
   style = {},
   size = 80,
   text = '',
@@ -11,7 +12,14 @@ export default UiRoundedButton = ({
 }) => {
   return (
     <TouchableOpacity style={[styles(size).radius]} onPress={onPress}>
-      <UiIcon name="add" color="#fff" style={[textStyle, styles(size).text]} />
+      {iconName && (
+        <UiIcon
+          name={iconName}
+          color="#fff"
+          style={[textStyle, styles(size).text]}
+        />
+      )}
+      <Text style={textStyle}>{text}</Text>
     </TouchableOpacity>
   );
 };
