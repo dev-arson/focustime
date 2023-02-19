@@ -1,47 +1,40 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet,
-  View,
-  StatusBar as DeviceStatusbar,
-  Text,
-  StatusBar,
+  StyleSheet, StatusBar,
 } from 'react-native';
 import { Home } from '@/views';
 import {
-  SafeAreaProvider,
-  SafeAreaView,
-  useSafeAreaInsets,
+  SafeAreaProvider, SafeAreaView,
 } from 'react-native-safe-area-context';
-import { default as FocusView } from './src/views/timer/index';
+import FocusView from './src/views/timer';
+import { spacing } from './src/utils/sizes';
 
 export default function App() {
   const [subject, setSubject] = useState(null);
 
-  return (
-    <SafeAreaProvider>
-      <SafeAreaView
-        edges={['top']}
-        style={{ flex: 0, backgroundColor: '#252525' }}
-      />
-      <SafeAreaView style={styles.wrapper} edges={['left', 'right']}>
-        {subject ? (
-          <FocusView
-            subject={subject}
-            onTimerEnd={() => {}}
-            clearSubject={() => {}}
-          />
-        ) : (
-          <Home addSubcject={setSubject} />
-        )}
-      </SafeAreaView>
-      <SafeAreaView edges={['bottom']} backgroundColor="#252525" />
-    </SafeAreaProvider>
-  );
+  return (<SafeAreaProvider>
+    <StatusBar barStyle={'light-content'} translucent={true} backgroundColor={'#252525'}/>
+    <SafeAreaView
+      edges={['top']}
+      style={{ flex: 0, backgroundColor: '#252525' }}
+    />
+    <SafeAreaView style={styles.wrapper} edges={['left', 'right']}>
+      {subject ? (<FocusView
+        subject={subject}
+        onTimerEnd={() => {
+        }}
+        clearSubject={() => {
+        }}
+      />) : (<Home addSubcject={setSubject}/>)}
+    </SafeAreaView>
+    <SafeAreaView edges={['bottom']} backgroundColor="#252525"/>
+  </SafeAreaProvider>);
 }
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: '#252525',
+    padding: spacing.xl,
   },
 });

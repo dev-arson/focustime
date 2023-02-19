@@ -3,33 +3,21 @@ import { StyleSheet, Text, View } from 'react-native';
 import { fontSizes, spacing } from '../../utils/sizes';
 import { formatTime, minutesToMilis } from '../../utils/time-converter';
 
-const SECOND_IN_MILIS = 1000;
-export default ({
+const SECOND_IN_MILLIS = 1000;
+export default UiCountdown ({
   minutes, isPaused, onProgress = () => {}, onEnd = () => {},
-}) => {
+})
+  {
   const interval = useRef(null);
-  const [millis, setMilis] = useState(0);
+  const [millis, setMillis] = useState(0);
 
-  const countDown = () => {
-    setMilis((time) => {
-      if (time === 0) {
-        clearInterval(interval.current);
-        onEnd();
-        return time;
-      }
-
-      onProgress();
-      const timeLeft = time - SECOND_IN_MILIS;
-      return timeLeft
-    });
-  }
-
-  useEffect(() => { 
-    setMilis(minutesToMilis(minutes))
+  useEffect(() => {
+    setMillis(minutesToMilis(minutes))
   }, [minutes]);
 
   useEffect(() => {
-    onProgress(millis / minutesToMilis(minutes))
+    const progressTime = millis / minutesToMilis(minutes);
+    onProgress(progressTime);
   }, [millis])
 
   useEffect(() => {
@@ -45,12 +33,25 @@ export default ({
     return () => clearInterval(interval.current);
   }, [isPaused]);
 
+  const countDown = () => {
+    setMillis((time) => {
+      if (time === 0) {
+        clearInterval(interval.current);
+        onEnd();
+        return time;
+      }
+
+      onProgress();
+      const timeLeft = time - SECOND_IN_MILLIS;
+      return timeLeft;
+    });
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        {formatTime(millis) ?? '0:00'}
-      </Text>
+        <Text style={styles.text}>
+          {formatTime(millis) ?? '0:00'}
+        </Text>
     </View>
   );
 };
