@@ -19,13 +19,14 @@ export default function App() {
       style={{ flex: 0, backgroundColor: '#252525' }}
     />
     <SafeAreaView style={styles.wrapper} edges={['left', 'right']}>
-      {subject ? (<FocusView
-        subject={subject}
-        onTimerEnd={() => {
-        }}
-        clearSubject={() => {
-        }}
-      />) : (<Home addSubcject={setSubject}/>)}
+      {subject ? (
+        <FocusView
+          subject={subject}
+          onTimerEnd={() => {
+          }}
+          clearSubject={() => {
+          }}
+        />) : (<Home addSubcject={setSubject}/>)}
     </SafeAreaView>
     <SafeAreaView edges={['bottom']} backgroundColor="#252525"/>
   </SafeAreaProvider>);

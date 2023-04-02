@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { StyleSheet, View } from "react-native";
-import { TextInput } from "react-native-paper";
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import { UiRoundedButton } from '@/components';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default ({ addSubcject }) => {
   const [subject, setSubject] = useState(null);
@@ -13,22 +14,25 @@ export default ({ addSubcject }) => {
           onChangeText={setSubject}
           label="What would You like to focus on?"
           style={styles.textInput}/>
-        <UiRoundedButton
-          text="+"
-          style={styles.buttonContainer} 
-          onPress={() => { addSubcject(subject) }}/>
       </View>
+      <UiRoundedButton
+        text="+"
+        style={styles.buttonContainer}
+        textStyle={styles.text}
+        onPress={() => {
+          addSubcject(subject);
+        }}/>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   wrapper: {
     flex: 1,
     padding: 5,
   },
   textInput: {
-    flex: 0.8,
+    flex: 1,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     borderBottomLeftRadius: 15,
@@ -40,10 +44,11 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   buttonContainer: {
-    flex: 0.2,
+
   },
   text: {
-    color: "#FFF",
-    textAlignment: "center",
+    color: '#FFF',
+    fontSize: '3rem',
+    textAlignment: 'center',
   },
 });
