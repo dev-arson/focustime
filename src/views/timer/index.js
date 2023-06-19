@@ -3,14 +3,14 @@ import {
   StyleSheet, Text, Vibration, View,
 } from 'react-native';
 import { ProgressBar } from 'react-native-paper';
+import { fontSizes, spacing } from '@/utils/sizes';
 import UiCountdown from '../../components/ui-countdown';
 import UiRoundedButton from '../../components/ui-rounded-button';
-import { fontSizes, spacing } from '../../utils/sizes';
 import { TimingButtons } from './components';
 
 export default function Timer(props) {
   const {
-    minutes, subject, onTimerEnd, clearSubject,
+    minutes, subject, onTimerEnd = () => {}, clearSubject,
   } = props;
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
@@ -31,7 +31,10 @@ export default function Timer(props) {
   return (
     <View style={styles.container}>
       <View style={styles.taskContainer}>
-        <Text style={styles.taskName}>{subject}</Text>
+        <Text
+          style={styles.taskName}>
+          {subject}
+        </Text>
         <View style={styles.countdown}>
           <UiCountdown
             minutes
@@ -39,7 +42,6 @@ export default function Timer(props) {
             onEnd={onEnd}
             onProgress={onProgress}
           />
-
         </View>
         <ProgressBar
           progress={progress}
@@ -47,13 +49,15 @@ export default function Timer(props) {
           style={styles.progress}
         />
       </View>
-      <View>
-        <View style={styles.buttonWrapper}>
+      <View style={{
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}>
           <UiRoundedButton
             onPress={onStartClick}
             text={getButtonTitle()}
             textStyle={styles.startButton}/>
-        </View>
+
         <View>
           <TimingButtons/>
         </View>
@@ -72,9 +76,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   taskName: {
-    fontSize: fontSizes.xxl,
+    fontSize: fontSizes.xl,
     textAlign: 'center',
-    paddingVertical: spacing.xxl,
+    paddingVertical: spacing.xl,
     fontWeight: 'bold',
     color: 'white',
   },

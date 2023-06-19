@@ -1,6 +1,4 @@
-import React, {
-  useEffect, useRef, useState,
-} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { fontSizes, spacing } from '../../utils/sizes';
 import { formatTime, minutesToMilis } from '../../utils/time-converter';
@@ -44,8 +42,7 @@ export default function UiCountdown(props) {
       }
 
       onProgress();
-      const timeLeft = time - SECOND_IN_MILLIS;
-      return timeLeft;
+      return time - SECOND_IN_MILLIS;
     });
   };
 

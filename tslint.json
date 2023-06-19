@@ -1,0 +1,64 @@
+{
+  "extends": [
+    "tslint-react-recommended"
+  ],
+  "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "indent": [
+      true,
+      "tabs",
+      2
+    ],
+    "ordered-imports": [
+      true
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "jsx-single",
+      "avoid-escape"
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "member-access": [
+      false
+    ],
+    "member-ordering": [
+      true,
+      "always"
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "singleline": "always",
+        "multiline": "always"
+      }
+    ],
+    "no-empty": false,
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false,
+    "no-constant-condition": false,
+    "triple-equals": [
+      true,
+      "allow-undefined-check"
+    ],
+    "no-duplicate-imports": false,
+    "jsx-alignment": true,
+    "jsx-no-bind": true,
+    "jsx-no-lambda": true,
+    "max-classes-per-file": [
+      false
+    ]
+  }
+}

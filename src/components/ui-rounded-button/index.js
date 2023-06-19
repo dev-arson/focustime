@@ -24,18 +24,18 @@ export default UiRoundedButton = ({
   );
 };
 
-const styles = size => ({
+const styles = (size) => ({
   radius: {
     justifyContent: 'center',
     alignItems: 'center',
     width: size,
     height: size,
-    borderColor: '#fff',
-    borderRadius: size / 2,
-    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: size,
+    borderWidth: 2,
   },
   text: {
     color: '#fff',
-    fontSize: size / 2,
+    fontSize: size,
   },
 });
