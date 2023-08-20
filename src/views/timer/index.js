@@ -7,12 +7,12 @@ import { spacing } from '@/utils/sizes';
 import UiCountdown from '../../components/ui-countdown';
 import { TimingButtons } from './components';
 import { EventsEmitter } from '@/events';
-import { RESET_TIMER } from "@/events/types";
+import { RESET_TIMER, TIME_ADDED } from "@/events/types";
 
 export default function Timer() {
   const [isStarted, setIsStarted] = useState(false);
   const [progress, setProgress] = useState(1);
-  const [minutes, setMinutes] = useState(25)
+  const [minutes, setMinutes] = useState(25);
 
   useEffect(() => {
     EventsEmitter.on(RESET_TIMER, resetTimer)
@@ -47,10 +47,7 @@ export default function Timer() {
   };
 
   const onAddTime = (minutes) => {
-    setMinutes((prev) => {
-      console.log('min', minutes, prev, prev + minutes)
-      minutes + prev
-    })
+    EventsEmitter.emit(TIME_ADDED, minutes);
   }
 
   const onResetTimer = () => {

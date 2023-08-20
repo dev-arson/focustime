@@ -1,7 +1,11 @@
-export const minutesToMilis = (minutes) => minutes * 60 * 1000;
+export const minutesToMillis = (minutes) => minutes * 60 * 1000;
 
 export const formatTime = (time) => {
-	const minute = Math.floor(time / 1000 / 60) % 60;
-	const seconds = Math.floor(time / 1000) % 60;
-	return `${String(minute)?.padStart(1, '0')}:${String(seconds)?.padStart(2, '0')}`
+	var seconds = Math.floor(time / 1000);
+	var minutes = Math.floor(seconds / 60);
+	const hours = Math.floor(minutes / 60);
+
+	minutes %= 60;
+	seconds %= 60;
+	return `${hours > 0 ? String(hours).padEnd(2,':') : ''}${String(minutes)?.padStart(2, '0')}:${String(seconds)?.padStart(2, '0')}`
 }

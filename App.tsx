@@ -47,7 +47,6 @@ export default function App() {
     <Provider>
       <NavigationContainer>
         <SafeAreaProvider>
-
           <StatusBar barStyle={'light-content'} translucent={true} backgroundColor={'#252525'}/>
           <SafeAreaView
             edges={['top']}

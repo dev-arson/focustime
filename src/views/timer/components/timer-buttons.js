@@ -19,7 +19,7 @@ export default function TimerButtons(props) {
         size={size}
         mode={mode}
         onPress={() => onTimeChange(1)}
-      >+</IconButton>
+      />
       <IconButton
         icon={'numeric-5'}
         iconColor={MD3Colors.error50}
