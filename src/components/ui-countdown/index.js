@@ -1,18 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { fontSizes, spacing } from '../../utils/sizes';
-import { formatTime, minutesToMilis } from '../../utils/time-converter';
+import { fontSizes, spacing } from '@/utils/sizes';
+import { formatTime, minutesToMilis } from '@/utils/time-converter';
+import { EventsEmitter } from "@/events";
+import { RESET_TIMER } from "@/events/types";
 
 const SECOND_IN_MILLIS = 1000;
 export default function UiCountdown(props) {
   const {
-    minutes, isPaused, onProgress, onEnd,
+    minutes,
+    isPaused,
+    onProgress,
+    onEnd,
   } = props;
   const interval = useRef(null);
   const [millis, setMillis] = useState(0);
 
   useEffect(() => {
-    setMillis(minutesToMilis(minutes));
+    setMillis((prev) => prev + minutesToMilis(minutes));
   }, [minutes]);
 
   useEffect(() => {
@@ -33,11 +38,22 @@ export default function UiCountdown(props) {
     return () => clearInterval(interval.current);
   }, [isPaused]);
 
+  useEffect(() => {
+    EventsEmitter.on(RESET_TIMER, reset)
+    return () => {
+      EventsEmitter.off(RESET_TIMER, reset)
+    };
+  }, []);
+
+  const reset = () => {
+    setMillis(minutesToMilis(minutes));
+  }
+
   const countDown = () => {
     setMillis((time) => {
       if (time === 0) {
         clearInterval(interval.current);
-        onEnd();
+        onEnd(reset);
         return time;
       }
 

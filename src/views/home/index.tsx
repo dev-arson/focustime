@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import {Text, View} from 'react-native';
 import { FAB, TextInput } from 'react-native-paper';
 import Animated, {
   SharedValue,
@@ -9,6 +9,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
+import {spacing} from "@/utils/sizes";
 
 export type StartWorkType = (value: string) => void;
 
@@ -64,6 +65,18 @@ export default function UiHome(props: Props) {
           accessibilityLanguage={undefined}
         />
       </Animated.View>
+
+      <View style={{
+        flex: 1,
+        backgroundColor: '#43434343',
+        borderRadius: 15,
+        marginTop: spacing.md,
+        padding: spacing.md,
+      }}>
+      <Text>
+        Last sessions screen
+      </Text>
+      </View>
       {isFabVisible && <FAB
         style={{
           width: 100,
@@ -77,7 +90,7 @@ export default function UiHome(props: Props) {
         label="work"
         accessibilityLabelledBy={undefined}
         accessibilityLanguage={undefined}
-        icon={''}/>}
+        icon={'play'}/>}
     </View>
   );
 }
