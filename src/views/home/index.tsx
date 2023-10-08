@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Text, View} from 'react-native';
-import { FAB, TextInput } from 'react-native-paper';
+import {FAB, TextInput} from 'react-native-paper';
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -10,6 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {spacing} from "@/utils/sizes";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export type StartWorkType = (value: string) => void;
 
@@ -18,13 +19,13 @@ type Props = {
 }
 export default function UiHome(props: Props) {
   const offsetX: SharedValue<number> = useSharedValue(0);
-  const { onAddPress } = props;
+  const {onAddPress} = props;
   const [subject, setSubject] = useState<string | null>(null);
   const [isFabVisible, setIsFabVisible] = useState<boolean>(true);
   const [isTextInputEnabled, setIsTextInputEnabled] = useState<boolean>(true);
   const animatedTextInputContainerStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: offsetX.value }],
+      transform: [{translateX: offsetX.value}],
     };
   });
 
@@ -43,9 +44,9 @@ export default function UiHome(props: Props) {
 
   const vibrateTextInput = () => {
     offsetX.value = withSequence(
-      withTiming(-2, { duration: 20 }),
-      withRepeat(withTiming(2, { duration: 20 }), 10, true),
-      withTiming(0, { duration: 20 }),
+      withTiming(-2, {duration: 20}),
+      withRepeat(withTiming(2, {duration: 20}), 10, true),
+      withTiming(0, {duration: 20}),
     );
   };
 
@@ -77,20 +78,31 @@ export default function UiHome(props: Props) {
         Last sessions screen
       </Text>
       </View>
-      {isFabVisible && <FAB
-        style={{
-          width: 100,
-          position: 'absolute',
-          bottom: 16,
-          right: 16,
-        }}
+      {isFabVisible ? <FAB
+        style={styles.fabButton}
         onPress={onFabClick}
         color={'black'}
         theme={'light'}
         label="work"
         accessibilityLabelledBy={undefined}
         accessibilityLanguage={undefined}
-        icon={'play'}/>}
+        icon={'play'}/> : null}
     </View>
   );
 }
+
+const styles = EStyleSheet.create({
+  fabButton: {
+    width: 100,
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
+  },
+  lastSessionContainer: {
+    flex: 1,
+    backgroundColor: '#43434343',
+    borderRadius: 15,
+    marginTop: spacing.md,
+    padding: spacing.md,
+  }
+})

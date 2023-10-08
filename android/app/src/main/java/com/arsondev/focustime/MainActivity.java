@@ -1,4 +1,4 @@
-package com.focustime;
+package com.arsondev.focustime;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

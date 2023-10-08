@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Keyboard, StatusBar} from 'react-native';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
@@ -16,6 +16,7 @@ import Animated, {
   SlideInUp,
 } from "react-native-reanimated";
 import LinearGradient from "react-native-linear-gradient";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export default function App() {
 
@@ -28,7 +29,7 @@ export default function App() {
     setSubject(value);
     setIsWorkTimerShowed(true);
     inputTextHeight.value = withTiming(0.1, {duration: 300});
-  timerViewHeight.value = withTiming(0.9, {duration: 300});
+    timerViewHeight.value = withTiming(0.9, {duration: 300});
   }
 
   const timerAnimatedStyle = useAnimatedStyle(() => {
@@ -47,7 +48,7 @@ export default function App() {
     <Provider>
       <NavigationContainer>
         <SafeAreaProvider>
-          <StatusBar barStyle={'light-content'} translucent={true} backgroundColor={'#252525'}/>
+          <StatusBar barStyle={'light-content'} translucent={true} backgroundColor={'#1e58af'}/>
           <SafeAreaView
             edges={['top']}
             style={{flex: 0, backgroundColor: '#252525'}}
@@ -58,13 +59,7 @@ export default function App() {
               ? <HomeView onAddPress={showTimer}/>
               : <Animated.Text
                 entering={SlideInUp}
-                style={{
-                  flex: 1,
-                  textAlign: 'center',
-                  fontSize: 40,
-                  justifyContent: 'center',
-                  fontWeight: 'bold'
-                }}>{subject}</Animated.Text>}
+                style={styles.workTextBox}>{subject}</Animated.Text>}
           </Animated.View>
           <Animated.View style={[{padding: spacing.md}, timerAnimatedStyle]}>
             {isWorkTimerShowed ?
@@ -74,8 +69,18 @@ export default function App() {
           </LinearGradient>
           <SafeAreaView
             edges={['bottom']}
-            style={{backgroundColor: "#252525"}}/>
+            style={{backgroundColor: "#1e58af"}}/>
         </SafeAreaProvider>
       </NavigationContainer>
     </Provider>);
 }
+
+const styles = EStyleSheet.create({
+  workTextBox: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 40,
+    justifyContent: 'center',
+    fontWeight: 'bold'
+  },
+});
